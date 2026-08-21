@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <!-- viewport-fit=cover でノッチ／ホームインジケータ領域まで背景を伸ばす。
+         maximum-scale は指定しない（指定すると iOS でピンチズームまで殺してしまうため）。 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>習慣トラッカー</title>
+    <meta name="description" content="毎日の習慣をチェックして、継続日数と達成率を記録するアプリ" />
+
+    <!-- テーマ色。ライト／ダークで分ける -->
+    <meta name="theme-color" content="#6366f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1b1a24" media="(prefers-color-scheme: dark)" />
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/favicon.png" sizes="64x64" type="image/png" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="習慣" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div class="app-header__text">
+          <h1 class="app-header__title" id="view-title">今日</h1>
+          <p class="app-header__subtitle" id="view-subtitle"></p>
+        </div>
+        <div class="app-header__slot" id="header-slot"></div>
+      </header>
+
+      <main class="app-main" id="view" tabindex="-1"></main>
+
+      <nav class="tabbar" id="tabbar" aria-label="メインナビゲーション">
+        <button class="tabbar__item" type="button" data-tab="today" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z" />
+            <path d="M8.5 12.5l2.5 2.5 4.5-5" class="stroke-accent" />
+          </svg>
+          <span>今日</span>
+        </button>
+        <button class="tabbar__item" type="button" data-tab="calendar">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h13A1.5 1.5 0 0 1 20 7.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z" />
+            <path d="M4 10h16M8.5 4v4M15.5 4v4" />
+          </svg>
+          <span>カレンダー</span>
+        </button>
+        <button class="tabbar__item" type="button" data-tab="stats">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 19V11M12 19V5M19 19v-6" />
+          </svg>
+          <span>統計</span>
+        </button>
+        <button class="tabbar__item" type="button" data-tab="settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.2" />
+            <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" />
+          </svg>
+          <span>設定</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- モーダル（習慣の追加・編集）。中身は JS で描画する -->
+    <div class="sheet-backdrop" id="sheet-backdrop" hidden>
+      <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title"></div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

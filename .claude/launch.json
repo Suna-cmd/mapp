@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "habit-tracker",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/serve.mjs", "4180"],
+      "port": 4180,
+      "autoPort": false
+    }
+  ]
+}
